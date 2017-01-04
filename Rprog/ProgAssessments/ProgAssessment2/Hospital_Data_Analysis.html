@@ -160,7 +160,6 @@ hist(outcome[, 11])</code></pre>
   if(!(state %in% outcome[, 7])){
     return(&quot;Invalid state&quot;)
   }
-  best = T
   b &lt;- outcome$State == state
   switch(condition,
          'Heart Attack'={
@@ -174,7 +173,6 @@ hist(outcome[, 11])</code></pre>
          },
          return(&quot;Error in best(&quot; + state + &quot;, &quot; + condition + &quot;) : invalid condition&quot;)
          )
-  col = 11
   stateData &lt;- outcome[b,]
   if(rank == &quot;best&quot;){
    stateData[with(stateData, order(stateData[, col], stateData[, 2], decreasing = T)),2]
@@ -190,11 +188,552 @@ hist(outcome[, 11])</code></pre>
   }
   
 }
-ranking(&quot;TX&quot;, &quot;Heart Attack&quot;, &quot;1&quot;)</code></pre>
-<pre><code>## [1] &quot;LAREDO MEDICAL CENTER&quot;</code></pre>
-<pre class="r"><code># best(&quot;TX&quot;, &quot;Heart Failuare&quot;)
-# best(&quot;MD&quot;, &quot;Heart Attack&quot;)
-# best(&quot;MD&quot;, &quot;Pneumonia&quot;)</code></pre>
+ranking(&quot;TX&quot;, &quot;Heart Attack&quot;, rank = &quot;worst&quot;)</code></pre>
+<pre><code>##   [1] &quot;CYPRESS FAIRBANKS MEDICAL CENTER&quot;                                
+##   [2] &quot;HOUSTON NORTHWEST MEDICAL CENTER&quot;                                
+##   [3] &quot;METHODIST HOSPITAL,THE&quot;                                          
+##   [4] &quot;PARKLAND HEALTH AND HOSPITAL SYSTEM&quot;                             
+##   [5] &quot;BAPTIST ST ANTHONYS HEALTH SYSTEM-BAPTIST CAMPUS&quot;                
+##   [6] &quot;METHODIST WILLOWBROOK HOSPITAL&quot;                                  
+##   [7] &quot;BRAZOSPORT REGIONAL HEALTH SYSTEM&quot;                               
+##   [8] &quot;DALLAS VA MEDICAL CENTER (VA NORTH TEXAS HEALTHCARE SYSTEM)&quot;     
+##   [9] &quot;MISSION REGIONAL MEDICAL CENTER&quot;                                 
+##  [10] &quot;SAN JACINTO METHODIST HOSPITAL&quot;                                  
+##  [11] &quot;COVENANT MEDICAL CENTER&quot;                                         
+##  [12] &quot;HOUSTON VA MEDICAL CENTER&quot;                                       
+##  [13] &quot;THE HEART HOSPITAL BAYLOR PLANO&quot;                                 
+##  [14] &quot;HARLINGEN MEDICAL CENTER&quot;                                        
+##  [15] &quot;CHRISTUS SANTA ROSA HOSPITAL&quot;                                    
+##  [16] &quot;SCOTT &amp; WHITE MEMORIAL HOSPITAL&quot;                                 
+##  [17] &quot;SOUTH TEXAS REGIONAL MEDICAL CENTER&quot;                             
+##  [18] &quot;LUBBOCK HEART HOSPITAL LP&quot;                                       
+##  [19] &quot;METROPLEX HOSPITAL&quot;                                              
+##  [20] &quot;NIX HEALTH CARE SYSTEM&quot;                                          
+##  [21] &quot;SETON MEDICAL CENTER AUSTIN&quot;                                     
+##  [22] &quot;CLEAR LAKE REGIONAL MEDICAL CENTER&quot;                              
+##  [23] &quot;PROVIDENCE HEALTH CENTER&quot;                                        
+##  [24] &quot;ST LUKE'S SUGAR LAND HOSPITAL&quot;                                   
+##  [25] &quot;HARRIS COUNTY HOSPITAL DISTRICT&quot;                                 
+##  [26] &quot;HUGULEY HEALTH SYSTEM&quot;                                           
+##  [27] &quot;MEMORIAL HEALTH SYSTEM OF EAST TEXAS- LUFKIN&quot;                    
+##  [28] &quot;RIO GRANDE REGIONAL HOSPITAL&quot;                                    
+##  [29] &quot;PARK PLAZA HOSPITAL&quot;                                             
+##  [30] &quot;ST LUKES EPISCOPAL HOSPITAL&quot;                                     
+##  [31] &quot;GOOD SHEPHERD MEDICAL CENTER MARSHALL&quot;                           
+##  [32] &quot;SHANNON MEDICAL CENTER&quot;                                          
+##  [33] &quot;TEXAS HEALTH PRESBYTERIAN HOSPITAL PLANO&quot;                        
+##  [34] &quot;UT SOUTHWESTERN UNIVERSITY HOSPITAL&quot;                             
+##  [35] &quot;CONNALLY MEMORIAL MEDICAL CENTER&quot;                                
+##  [36] &quot;METHODIST SUGAR LAND HOSPITAL&quot;                                   
+##  [37] &quot;MOTHER FRANCES HOSPITAL&quot;                                         
+##  [38] &quot;SCOTT &amp; WHITE HOSPITAL-ROUND ROCK&quot;                               
+##  [39] &quot;BROWNWOOD REGIONAL MEDICAL CENTER&quot;                               
+##  [40] &quot;CENTRAL TEXAS MEDICAL CENTER&quot;                                    
+##  [41] &quot;TEXAS HEALTH HARRIS METHODIST HOSPITAL SOUTHWEST F&quot;              
+##  [42] &quot;UVALDE MEMORIAL HOSPITAL&quot;                                        
+##  [43] &quot;DOCTORS HOSPITAL&quot;                                                
+##  [44] &quot;HILL REGIONAL HOSPITAL&quot;                                          
+##  [45] &quot;METHODIST STONE OAK HOSPITAL&quot;                                    
+##  [46] &quot;BAPTIST MEDICAL CENTER&quot;                                          
+##  [47] &quot;BAYLOR HEART AND VASCULAR HOSPITAL&quot;                              
+##  [48] &quot;DOCTORS HOSPITAL TIDWELL&quot;                                        
+##  [49] &quot;HOPKINS COUNTY MEMORIAL HOSPITAL&quot;                                
+##  [50] &quot;MEDICAL CENTER OF MCKINNEY&quot;                                      
+##  [51] &quot;ST DAVID'S SOUTH AUSTIN MEDICAL CENTER&quot;                          
+##  [52] &quot;TEXAS HEALTH HARRIS METHODIST FORT WORTH&quot;                        
+##  [53] &quot;TEXAS REGIONAL MEDICAL CENTER AT SUNNYVALE&quot;                      
+##  [54] &quot;BAYLOR MEDICAL CENTER AT GARLAND&quot;                                
+##  [55] &quot;ETMC CARTHAGE&quot;                                                   
+##  [56] &quot;PARKVIEW REGIONAL HOSPITAL&quot;                                      
+##  [57] &quot;SAN ANTONIO VA MEDICAL CENTER (VA SOUTH TEXAS HEALTHCARE SYSTEM)&quot;
+##  [58] &quot;BAYLOR MEDICAL CENTER AT IRVING&quot;                                 
+##  [59] &quot;CHRISTUS HOSPITAL&quot;                                               
+##  [60] &quot;METHODIST MANSFIELD MEDICAL CENTER&quot;                              
+##  [61] &quot;BAYLOR MEDICAL CENTER AT CARROLLTON&quot;                             
+##  [62] &quot;BAYLOR MEDICAL CENTER AT WAXAHACHIE&quot;                             
+##  [63] &quot;CHRISTUS ST CATHERINE HOSPITAL&quot;                                  
+##  [64] &quot;CHRISTUS ST JOHN HOSPITAL&quot;                                       
+##  [65] &quot;DALLAS MEDICAL CENTER&quot;                                           
+##  [66] &quot;EAST EL PASO PHYSICIANS MEDICAL CENTER, LLC&quot;                     
+##  [67] &quot;GUADALUPE REGIONAL MEDICAL CENTER&quot;                               
+##  [68] &quot;STARR COUNTY MEMORIAL HOSPITAL&quot;                                  
+##  [69] &quot;ST LUKE'S THE WOODLANDS HOSPITAL&quot;                                
+##  [70] &quot;TEXAS HEALTH HARRIS METHODIST HOSPITAL CLEBURNE&quot;                 
+##  [71] &quot;TEXAS HEALTH HARRIS METHODIST HOSPITAL STEPHENVILL&quot;              
+##  [72] &quot;NORTH CYPRESS MEDICAL CENTER&quot;                                    
+##  [73] &quot;NORTH TEXAS MEDICAL CENTER&quot;                                      
+##  [74] &quot;RENAISSANCE HOSPITAL TERRELL&quot;                                    
+##  [75] &quot;MEDICAL CENTER OF PLANO&quot;                                         
+##  [76] &quot;SETON MEDICAL CENTER HAYS&quot;                                       
+##  [77] &quot;ST LUKE'S PATIENTS MEDICAL CENTER&quot;                               
+##  [78] &quot;VA AMARILLO HEALTHCARE SYSTEM&quot;                                   
+##  [79] &quot;VHS BROWNSVILLE HOSPITAL COMPANY, LLC&quot;                           
+##  [80] &quot;ETMC HENDERSON&quot;                                                  
+##  [81] &quot;FORT DUNCAN MEDICAL CENTER&quot;                                      
+##  [82] &quot;KINGWOOD MEDICAL CENTER&quot;                                         
+##  [83] &quot;SOUTH TEXAS HEALTH SYSTEM&quot;                                       
+##  [84] &quot;SOUTHWEST GENERAL HOSPITAL&quot;                                      
+##  [85] &quot;TOMBALL REGIONAL MEDICAL CENTER&quot;                                 
+##  [86] &quot;HENDRICK MEDICAL CENTER&quot;                                         
+##  [87] &quot;METHODIST DALLAS MEDICAL CENTER&quot;                                 
+##  [88] &quot;PARIS REGIONAL MEDICAL CENTER&quot;                                   
+##  [89] &quot;TEMPLE VA MEDICAL CENTER (VA CENTRAL TEXAS HEALTHCARE SYSTEM)&quot;   
+##  [90] &quot;TEXAS HEALTH PRESBYTERIAN HOSPITAL DENTON&quot;                       
+##  [91] &quot;UNIVERSITY OF TEXAS HEALTH SCIENCE CENTER AT TYLER&quot;              
+##  [92] &quot;BAYLOR ALL SAINTS MEDICAL CENTER AT FW&quot;                          
+##  [93] &quot;BAYLOR REGIONAL MEDICAL CENTER AT PLANO&quot;                         
+##  [94] &quot;CHRISTUS SPOHN HOSPITAL ALICE&quot;                                   
+##  [95] &quot;EAST TEXAS MEDICAL CENTER&quot;                                       
+##  [96] &quot;MEDICAL CENTER HOSPITAL&quot;                                         
+##  [97] &quot;PETERSON REGIONAL MEDICAL CENTER&quot;                                
+##  [98] &quot;ST JOSEPH REGIONAL HEALTH CENTER&quot;                                
+##  [99] &quot;TEXAS HEALTH ARLINGTON MEMORIAL HOSPITAL&quot;                        
+## [100] &quot;UNIVERSITY HEALTH SYSTEM&quot;                                        
+## [101] &quot;LAS PALMAS MEDICAL CENTER&quot;                                       
+## [102] &quot;LONGVIEW REGIONAL MEDICAL CENTER&quot;                                
+## [103] &quot;MEDICAL CITY DALLAS HOSPITAL&quot;                                    
+## [104] &quot;EL CAMPO MEMORIAL HOSPITAL&quot;                                      
+## [105] &quot;HILL COUNTRY MEMORIAL HOSPITAL INC&quot;                              
+## [106] &quot;NORTH AUSTIN MEDICAL CENTER&quot;                                     
+## [107] &quot;BAYLOR REGIONAL MEDICAL CENTER AT GRAPEVINE&quot;                     
+## [108] &quot;CITIZENS MEDICAL CENTER&quot;                                         
+## [109] &quot;CLEVELAND REGIONAL MEDICAL CTR&quot;                                  
+## [110] &quot;MEMORIAL HERMANN HOSPITAL SYSTEM&quot;                                
+## [111] &quot;TEXAS HEALTH HARRIS METHODIST HURST-EULESS-BEDFORD&quot;              
+## [112] &quot;YOAKUM COMMUNITY HOSPITAL&quot;                                       
+## [113] &quot;DETAR HOSPITAL NAVARRO&quot;                                          
+## [114] &quot;HAMILTON GENERAL HOSPITAL&quot;                                       
+## [115] &quot;MEMORIAL HERMANN SUGAR LAND HOSPITAL&quot;                            
+## [116] &quot;PROVIDENCE MEMORIAL HOSPITAL&quot;                                    
+## [117] &quot;ROUND ROCK MEDICAL CENTER&quot;                                       
+## [118] &quot;SPRING BRANCH MEDICAL CENTER&quot;                                    
+## [119] &quot;THE MEDICAL CENTER OF SOUTHEAST TEXAS&quot;                           
+## [120] &quot;TITUS REGIONAL MEDICAL CENTER&quot;                                   
+## [121] &quot;VHS HARLINGEN HOSPITAL COMPANY LLC&quot;                              
+## [122] &quot;ATLANTA MEMORIAL HOSPITAL&quot;                                       
+## [123] &quot;CORPUS CHRISTI MEDICAL CENTER,THE&quot;                               
+## [124] &quot;DOCTORS HOSPITAL AT RENAISSANCE&quot;                                 
+## [125] &quot;HILLCREST BAPTIST MEDICAL CENTER&quot;                                
+## [126] &quot;MEDICAL CENTER OF LEWISVILLE&quot;                                    
+## [127] &quot;METHODIST HOSPITAL&quot;                                              
+## [128] &quot;OAKBEND MEDICAL CENTER&quot;                                          
+## [129] &quot;SAN ANGELO COMMUNITY MEDICAL CENTER&quot;                             
+## [130] &quot;ST DAVIDS MEDICAL CENTER&quot;                                        
+## [131] &quot;UNIVERSITY MEDICAL CENTER AT BRACKENRIDGE&quot;                       
+## [132] &quot;WISE REGIONAL HEALTH SYSTEM&quot;                                     
+## [133] &quot;HUNT REGIONAL MEDICAL CENTER&quot;                                    
+## [134] &quot;MEMORIAL HERMANN BAPTIST ORANGE HOSPITAL&quot;                        
+## [135] &quot;METHODIST RICHARDSON MEDICAL CENTER&quot;                             
+## [136] &quot;NACOGDOCHES MEDICAL CENTER&quot;                                      
+## [137] &quot;NORTH HILLS HOSPITAL&quot;                                            
+## [138] &quot;VAL VERDE REGIONAL MEDICAL CENTER&quot;                               
+## [139] &quot;WEST HOUSTON MEDICAL CENTER&quot;                                     
+## [140] &quot;EAST TEXAS MEDICAL CENTER ATHENS&quot;                                
+## [141] &quot;EAST TEXAS MEDICAL CENTER CROCKETT&quot;                              
+## [142] &quot;MEMORIAL HOSPITAL&quot;                                               
+## [143] &quot;SETON MEDICAL CENTER WILLIAMSON&quot;                                 
+## [144] &quot;UNIVERSITY MEDICAL CENTER OF EL PASO&quot;                            
+## [145] &quot;SIERRA MEDICAL CENTER&quot;                                           
+## [146] &quot;ST MARKS MEDICAL CENTER&quot;                                         
+## [147] &quot;WEATHERFORD REGIONAL MEDICAL CENTER&quot;                             
+## [148] &quot;WOODLAND HEIGHTS MEDICAL CENTER&quot;                                 
+## [149] &quot;COLLEGE STATION MEDICAL CENTER&quot;                                  
+## [150] &quot;GOOD SHEPHERD MEDICAL CENTER&quot;                                    
+## [151] &quot;LAKE POINTE MEDICAL CENTER&quot;                                      
+## [152] &quot;MEMORIAL HERMANN BAPTIST BEAUMONT HOSPITAL&quot;                      
+## [153] &quot;MEMORIAL HERMANN NORTHEAST&quot;                                      
+## [154] &quot;TEXAS HEALTH PRESBYTERIAN HOSPITAL-WNJ&quot;                          
+## [155] &quot;LAKE GRANBURY MEDICAL CENTER&quot;                                    
+## [156] &quot;VALLEY REGIONAL MEDICAL CENTER&quot;                                  
+## [157] &quot;CHRISTUS SPOHN HOSPITAL CORPUS CHRISTI&quot;                          
+## [158] &quot;LAS COLINAS MEDICAL CENTER&quot;                                      
+## [159] &quot;MEMORIAL HERMANN KATY HOSPITAL&quot;                                  
+## [160] &quot;SCENIC MOUNTAIN MEDICAL CENTER&quot;                                  
+## [161] &quot;COMANCHE COUNTY MEDICAL CENTER&quot;                                  
+## [162] &quot;MIDLAND MEMORIAL HOSPITAL&quot;                                       
+## [163] &quot;TEXAS HEALTH PRESBYTERIAN HOSPITAL KAUFMAN&quot;                      
+## [164] &quot;CENTENNIAL MEDICAL CENTER&quot;                                       
+## [165] &quot;CUERO COMMUNITY HOSPITAL&quot;                                        
+## [166] &quot;MEMORIAL HERMANN MEMORIAL CITY MEDICAL CENTER&quot;                   
+## [167] &quot;PLAZA MEDICAL CENTER OF FORT WORTH&quot;                              
+## [168] &quot;ABILENE REGIONAL MEDICAL CENTER&quot;                                 
+## [169] &quot;DOCTORS HOSPITAL OF LAREDO&quot;                                      
+## [170] &quot;KNAPP MEDICAL CENTER&quot;                                            
+## [171] &quot;MATAGORDA REGIONAL MEDICAL CENTER&quot;                               
+## [172] &quot;NORTHWEST TEXAS HOSPITAL&quot;                                        
+## [173] &quot;PALESTINE REGIONAL MEDICAL CENTER&quot;                               
+## [174] &quot;CONROE REGIONAL MEDICAL CENTER&quot;                                  
+## [175] &quot;MEMORIAL HERMANN TEXAS MEDICAL CENTER&quot;                           
+## [176] &quot;ST JOSEPH MEDICAL CENTER&quot;                                        
+## [177] &quot;UNITED REGIONAL HEALTH CARE SYSTEM&quot;                              
+## [178] &quot;UNIVERSITY OF TEXAS MEDICAL BRANCH GAL&quot;                          
+## [179] &quot;TEXAS HEALTH PRESBYTERIAN HOSPITAL  DALLAS&quot;                      
+## [180] &quot;MEDICAL CENTER OF ARLINGTON&quot;                                     
+## [181] &quot;CHRISTUS ST MICHAEL HEALTH SYSTEM&quot;                               
+## [182] &quot;METHODIST CHARLTON MEDICAL CENTER&quot;                               
+## [183] &quot;NAVARRO REGIONAL HOSPITAL&quot;                                       
+## [184] &quot;SIERRA PROVIDENCE EAST MEDICAL CENTER&quot;                           
+## [185] &quot;EAST TEXAS MEDICAL CENTER JACKSONVILLE&quot;                          
+## [186] &quot;TRINITY MEDICAL CENTER&quot;                                          
+## [187] &quot;ODESSA REGIONAL HOSPITAL&quot;                                        
+## [188] &quot;BAYLOR UNIVERSITY MEDICAL CENTER&quot;                                
+## [189] &quot;DALLAS REGIONAL MEDICAL CENTER&quot;                                  
+## [190] &quot;TEXOMA MEDICAL CENTER&quot;                                           
+## [191] &quot;BAYSHORE MEDICAL CENTER&quot;                                         
+## [192] &quot;UNIVERSITY MEDICAL CENTER&quot;                                       
+## [193] &quot;JPS HEALTH NETWORK&quot;                                              
+## [194] &quot;DENTON REGIONAL MEDICAL CENTER&quot;                                  
+## [195] &quot;WADLEY REGIONAL MEDICAL CENTER&quot;                                  
+## [196] &quot;LAREDO MEDICAL CENTER&quot;                                           
+## [197] &quot;ALLEGIANCE  HOSPTIAL OF MIDLAND-PERMIAN BASIN&quot;                   
+## [198] &quot;ALLEGIANCE SPECIALTY HOSPITAL OF KILGORE&quot;                        
+## [199] &quot;ANGLETON-DANBURY MEDICAL CENTER&quot;                                 
+## [200] &quot;ANSON GENERAL HOSPITAL&quot;                                          
+## [201] &quot;AUSTIN SURGICAL HOSPITAL&quot;                                        
+## [202] &quot;BALLINGER MEMORIAL HOSPITAL&quot;                                     
+## [203] &quot;BASIN HEALTHCARE CENTER, LLC&quot;                                    
+## [204] &quot;BAYLOR MEDICAL CENTER AT FRISCO&quot;                                 
+## [205] &quot;BAYLOR MEDICAL CENTER AT TROPHY CLUB&quot;                            
+## [206] &quot;BAYLOR MEDICAL CENTER AT UPTOWN&quot;                                 
+## [207] &quot;BAYLOR ORTHOPEDIC AND SPINE HOSPITAL AT ARLINGTON&quot;               
+## [208] &quot;BAYLOR SURGICAL HOSPITAL AT FORT WORTH&quot;                          
+## [209] &quot;BAYSIDE COMMUNITY HOSPITAL&quot;                                      
+## [210] &quot;BELLVILLE GENERAL HOSPITAL&quot;                                      
+## [211] &quot;BIG BEND REGIONAL MEDICAL CENTER&quot;                                
+## [212] &quot;BOWIE MEMORIAL HOSPITAL&quot;                                         
+## [213] &quot;BROWNFIELD REGIONAL MEDICAL CENTER&quot;                              
+## [214] &quot;BROWNSVILLE SURGICAL HOSPITAL&quot;                                   
+## [215] &quot;BURLESON ST JOSEPH HEALTH CENTER&quot;                                
+## [216] &quot;CARE REGIONAL MEDICAL CENTER&quot;                                    
+## [217] &quot;CEDAR PARK REGIONAL MEDICAL CENTER&quot;                              
+## [218] &quot;CENTRAL TEXAS HOSPITAL&quot;                                          
+## [219] &quot;CHILDREN'S HOSPITAL -SCOTT &amp; WHITE HEALTHCARE&quot;                   
+## [220] &quot;CHILDRESS REGIONAL MEDICAL CENTER&quot;                               
+## [221] &quot;CHRISTUS JASPER MEMORIAL HOSPITAL&quot;                               
+## [222] &quot;CHRISTUS SPOHN HOSPITAL BEEVILLE&quot;                                
+## [223] &quot;CHRISTUS SPOHN HOSPITAL KLEBERG&quot;                                 
+## [224] &quot;COGDELL MEMORIAL HOSPITAL&quot;                                       
+## [225] &quot;COLEMAN COUNTY MEDICAL CENTER&quot;                                   
+## [226] &quot;COLORADO FAYETTE MEDICAL CENTER&quot;                                 
+## [227] &quot;COLUMBUS COMMUNITY HOSPITAL&quot;                                     
+## [228] &quot;COMMUNITY GENERAL HOSPITAL&quot;                                      
+## [229] &quot;COOK CHILDRENS MEDICAL CENTER&quot;                                   
+## [230] &quot;COON MEMORIAL HOSPITAL&quot;                                          
+## [231] &quot;CORNERSTONE REGIONAL HOSPITAL&quot;                                   
+## [232] &quot;CORYELL MEMORIAL HEALTHCARE SYSTEM&quot;                              
+## [233] &quot;COVENANT HOSPITAL LEVELLAND&quot;                                     
+## [234] &quot;COVENANT HOSPITAL PLAINVIEW&quot;                                     
+## [235] &quot;COZBY-GERMANY HOSPITAL&quot;                                          
+## [236] &quot;DELL CHILDREN'S MEDICAL CENTER OF CENTRAL TEXAS&quot;                 
+## [237] &quot;DIMMIT COUNTY MEMORIAL HOSPITAL&quot;                                 
+## [238] &quot;DOCTORS DIAGNOSTIC HOSPITAL&quot;                                     
+## [239] &quot;DOCTORS HOSPITAL&quot;                                                
+## [240] &quot;DRISCOLL CHILDRENS HOSPITAL&quot;                                     
+## [241] &quot;EASTLAND MEMORIAL HOSPITAL&quot;                                      
+## [242] &quot;EAST TEXAS MEDICAL CENTER - FAIRFIELD&quot;                           
+## [243] &quot;EAST TEXAS MEDICAL CENTER - GILMER&quot;                              
+## [244] &quot;EAST TEXAS MEDICAL CENTER MOUNT VERNON&quot;                          
+## [245] &quot;EAST TEXAS MEDICAL CENTER PITTSBURG&quot;                             
+## [246] &quot;EAST TEXAS MEDICAL CENTER TRINITY&quot;                               
+## [247] &quot;ELECTRA MEMORIAL HOSPITAL&quot;                                       
+## [248] &quot;EL PASO SPECIALTY HOSPITAL&quot;                                      
+## [249] &quot;EMERUS HOSPITAL&quot;                                                 
+## [250] &quot;ENNIS REGIONAL MEDICAL CENTER&quot;                                   
+## [251] &quot;ETMC CLARKSVILLE&quot;                                                
+## [252] &quot;FAITH COMMUNITY HOSPITAL&quot;                                        
+## [253] &quot;FALLS COMMUNITY HOSPITAL AND CLINIC&quot;                             
+## [254] &quot;FIRST STREET HOSPITAL LP&quot;                                        
+## [255] &quot;FISHER COUNTY HOSPITAL DISTRICT&quot;                                 
+## [256] &quot;FOREST PARK MEDICAL CENTER&quot;                                      
+## [257] &quot;FOUNDATION SURGICAL HOSPITAL&quot;                                    
+## [258] &quot;FOUNDATION SURGICAL HOSPITAL OF SAN ANTONIO&quot;                     
+## [259] &quot;FRIO REGIONAL HOSPITAL&quot;                                          
+## [260] &quot;GLEN ROSE MEDICAL CENTER&quot;                                        
+## [261] &quot;GOLDEN PLAINS COMMUNITY HOSPITAL&quot;                                
+## [262] &quot;GOODALL WITCHER HOSPITAL&quot;                                        
+## [263] &quot;GOOD SHEPHARD MEDICAL CENTER-LINDEN&quot;                             
+## [264] &quot;GRACE MEDICAL CENTER&quot;                                            
+## [265] &quot;GRAHAM REGIONAL MEDICAL CENTER&quot;                                  
+## [266] &quot;GRIMES ST JOSEPH HEALTH CENTER&quot;                                  
+## [267] &quot;GULF COAST MEDICAL CENTER&quot;                                       
+## [268] &quot;HAMLIN MEMORIAL HOSPITAL&quot;                                        
+## [269] &quot;HANSFORD COUNTY HOSPITAL&quot;                                        
+## [270] &quot;HASKELL MEMORIAL HOSPITAL&quot;                                       
+## [271] &quot;HEMPHILL COUNTY HOSPITAL&quot;                                        
+## [272] &quot;HEREFORD REGIONAL MEDICAL CENTER&quot;                                
+## [273] &quot;HERITAGE PARK SURGICAL HOSPITAL&quot;                                 
+## [274] &quot;HOUSTON HOSPITAL FOR SPECIALIZED SURGERY&quot;                        
+## [275] &quot;HOUSTON PHYSICIANS' HOSPITAL&quot;                                    
+## [276] &quot;HUNT REGIONAL COMMUNITY HOSPITAL&quot;                                
+## [277] &quot;HUNTSVILLE MEMORIAL HOSPITAL&quot;                                    
+## [278] &quot;IRVING COPPELL SURGICAL HOSPITAL LLP&quot;                            
+## [279] &quot;KELL WEST REGIONAL HOSPITAL&quot;                                     
+## [280] &quot;KNOX COUNTY HOSPITAL&quot;                                            
+## [281] &quot;LAKE WHITNEY MEDICAL CENTER&quot;                                     
+## [282] &quot;LAMB HEALTHCARE CENTER&quot;                                          
+## [283] &quot;LAVACA MEDICAL CENTER&quot;                                           
+## [284] &quot;LIMESTONE MEDICAL CENTER&quot;                                        
+## [285] &quot;MADISON ST JOSEPH HEALTH CENTER&quot;                                 
+## [286] &quot;MAYHILL HOSPITAL&quot;                                                
+## [287] &quot;MCCAMEY HOSPITAL&quot;                                                
+## [288] &quot;MEDICAL ARTS HOSPITAL&quot;                                           
+## [289] &quot;MEDINA REGIONAL HOSPITAL&quot;                                        
+## [290] &quot;MEMORIAL HERMANN SURGICAL HOSPITAL KINGWOOD&quot;                     
+## [291] &quot;MEMORIAL HOSPITAL&quot;                                               
+## [292] &quot;MEMORIAL MEDICAL CENTER&quot;                                         
+## [293] &quot;MEMORIAL MEDICAL CENTER LIVINGSTON&quot;                              
+## [294] &quot;METHODIST AMBULATORY SURGERY HOSPITAL NW&quot;                        
+## [295] &quot;METHODIST HOSPITAL FOR SURGERY&quot;                                  
+## [296] &quot;METHODIST MCKINNEY HOSPITAL&quot;                                     
+## [297] &quot;METHODIST WEST HOUSTON HOSPITAL&quot;                                 
+## [298] &quot;MITCHELL COUNTY HOSPITAL DISTRICT&quot;                               
+## [299] &quot;MOORE COUNTY HOSPITAL DISTRICT&quot;                                  
+## [300] &quot;MOTHER FRANCES HOSPITAL JACKSONVILLE&quot;                            
+## [301] &quot;MULESHOE AREA MEDICAL CENTER&quot;                                    
+## [302] &quot;NOCONA GENERAL HOSPITAL&quot;                                         
+## [303] &quot;NORTH CENTRAL SURGICAL CENTER LLP&quot;                               
+## [304] &quot;NORTH RUNNELS HOSPITAL&quot;                                          
+## [305] &quot;NORTH TEXAS HOSPITAL&quot;                                            
+## [306] &quot;NORTHWEST HILLS SURGICAL HOSPITAL&quot;                               
+## [307] &quot;NORTHWEST TEXAS SURGERY CENTER&quot;                                  
+## [308] &quot;OTTO KAISER MEMORIAL HOSPITAL&quot;                                   
+## [309] &quot;PALO PINTO GENERAL HOSPITAL&quot;                                     
+## [310] &quot;PAMPA REGIONAL MEDICAL CENTER&quot;                                   
+## [311] &quot;PARKVIEW HOSPITAL&quot;                                               
+## [312] &quot;PECOS COUNTY MEMORIAL HOSPITAL&quot;                                  
+## [313] &quot;PERMIAN REGIONAL MEDICAL CENTER ANDREWS COUNTY HO&quot;               
+## [314] &quot;PHYSICIANS CENTRE,THE&quot;                                           
+## [315] &quot;PINE CREEK MEDICAL CENTER LLP&quot;                                   
+## [316] &quot;PLAINS MEMORIAL HOSPITAL&quot;                                        
+## [317] &quot;QUAIL CREEK SURGICAL HOSPITAL&quot;                                   
+## [318] &quot;REAGAN MEMORIAL HOSPITAL&quot;                                        
+## [319] &quot;RED RIVER REGIONAL HOSPITAL&quot;                                     
+## [320] &quot;REEVES COUNTY HOSPITAL DISTRICT&quot;                                 
+## [321] &quot;RENAISSANCE HOSPITAL GROVES&quot;                                     
+## [322] &quot;RIVERSIDE GENERAL HOSPITAL&quot;                                      
+## [323] &quot;ROLLING PLAINS MEMORIAL HOSPITAL&quot;                                
+## [324] &quot;ROLLINS BROOK COMMUNITY HOSPITAL&quot;                                
+## [325] &quot;SCOTT &amp; WHITE HOSPITAL-LLANO&quot;                                    
+## [326] &quot;SCOTT &amp; WHITE HOSPITAL-TAYLOR&quot;                                   
+## [327] &quot;SETON EDGAR B DAVIS HOSPITAL&quot;                                    
+## [328] &quot;SETON HIGHLAND LAKES&quot;                                            
+## [329] &quot;SETON  NORTHWEST HOSPITAL&quot;                                       
+## [330] &quot;SETON SMITHVILLE REGIONAL HOSPITAL&quot;                              
+## [331] &quot;SETON SOUTHWEST HOSPITAL&quot;                                        
+## [332] &quot;SEYMOUR HOSPITAL&quot;                                                
+## [333] &quot;SOUTH HAMPTON COMMUNITY HOSPITAL&quot;                                
+## [334] &quot;SOUTH TEXAS SPINE AND SURGICAL HOSPITAL&quot;                         
+## [335] &quot;SOUTH TEXAS SURGICAL HOSPITAL&quot;                                   
+## [336] &quot;SOUTHWEST SURGICAL HOSPITAL&quot;                                     
+## [337] &quot;STAMFORD MEMORIAL HOSPITAL&quot;                                      
+## [338] &quot;ST ANTHONY'S HOSPITAL&quot;                                           
+## [339] &quot;STEPHENS MEMORIAL HOSPITAL&quot;                                      
+## [340] &quot;ST LUKE'S HOSPITAL AT THE VINTAGE, LLC&quot;                          
+## [341] &quot;ST LUKES LAKESIDE HOSPITAL&quot;                                      
+## [342] &quot;SUGAR LAND SURGICAL HOSPITAL LLP&quot;                                
+## [343] &quot;SURGERY SPECIALTY HOSPITALS OF AMERICA SE HOUSTON&quot;               
+## [344] &quot;SWISHER MEMORIAL HOSPITAL&quot;                                       
+## [345] &quot;TEXAS HEALTH CENTER FOR DIAGNOSTICS &amp; SURGERY PLAN&quot;              
+## [346] &quot;TEXAS HEALTH HARRIS METHODIST HOSPITAL AZLE&quot;                     
+## [347] &quot;TEXAS HEALTH HARRIS METHODIST HOSPITAL SOUTHLAKE&quot;                
+## [348] &quot;TEXAS HEALTH HEART &amp; VASCULAR HOSPITAL ARLINGTON&quot;                
+## [349] &quot;TEXAS HEALTH PRESBYTERIAN HOSPITAL ALLEN&quot;                        
+## [350] &quot;TEXAS HEALTH PRESBYTERIAN HOSPITAL FLOWER MOUND&quot;                 
+## [351] &quot;TEXAS HEALTH PRESBYTERIAN HOSPITAL ROCKWALL&quot;                     
+## [352] &quot;TEXAS INSTITUTE FOR SURGERY AT PRESBYTERIAN HOSPIT&quot;              
+## [353] &quot;TEXAS ORTHOPEDIC HOSPITAL&quot;                                       
+## [354] &quot;TEXAS SPINE AND JOINT HOSPITAL&quot;                                  
+## [355] &quot;THE HOSPITAL AT CRAIG RANCH&quot;                                     
+## [356] &quot;THE HOSPITAL AT WESTLAKE MEDICAL CENTER&quot;                         
+## [357] &quot;TOPS SURGICAL SPECIALTY HOSPITAL&quot;                                
+## [358] &quot;TRUSTPOINT HOSPITAL&quot;                                             
+## [359] &quot;TYLER COUNTY HOSPITAL&quot;                                           
+## [360] &quot;UNIVERSITY GENERAL HOSPITAL&quot;                                     
+## [361] &quot;USMD HOSPITAL AT ARLINGTON L P&quot;                                  
+## [362] &quot;USMD HOSPITAL  AT FORT WORTH LP&quot;                                 
+## [363] &quot;UT SOUTHWESTERN UNIVERSITY HOSPITAL-ZALE LIPSHY&quot;                 
+## [364] &quot;VA WEST TEXAS HEALTHCARE SYSTEM&quot;                                 
+## [365] &quot;WARD MEMORIAL HOSPITAL&quot;                                          
+## [366] &quot;WESTBURY COMMUNITY HOSPITAL, LLC&quot;                                
+## [367] &quot;WILBARGER GENERAL HOSPITAL&quot;                                      
+## [368] &quot;W J MANGOLD MEMORIAL HOSPITAL&quot;                                   
+## [369] &quot;WOMANS HOSPITAL OF TEXAS,THE&quot;                                    
+## [370] &quot;YOAKUM COUNTY HOSPITAL&quot;</code></pre>
+<pre class="r"><code>best &lt;- function(state, condition){
+  ranking(state, condition, rank = 1)
+}
+best(&quot;MD&quot;, &quot;Pneumonia&quot;)</code></pre>
+<pre><code>## [1] &quot;UNION HOSPITAL OF CECIL COUNTY&quot;</code></pre>
+<pre class="r"><code>rankall &lt;- function(condition, rank = &quot;best&quot;){
+  top_rankings = data.frame()
+  states = unique(outcome[, 7])
+  lapply(states, function(f){
+    paste(f, &quot;:&quot;, ranking(f, condition, 1))
+    })
+}
+
+rankall(&quot;Heart Attack&quot;)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;AL : HELEN KELLER MEMORIAL HOSPITAL&quot;
+## 
+## [[2]]
+## [1] &quot;AK : MAT-SU REGIONAL MEDICAL CENTER&quot;
+## 
+## [[3]]
+## [1] &quot;AZ : VERDE VALLEY MEDICAL CENTER&quot;
+## 
+## [[4]]
+## [1] &quot;AR : MEDICAL CENTER SOUTH ARKANSAS&quot;
+## 
+## [[5]]
+## [1] &quot;CA : METHODIST HOSPITAL OF SACRAMENTO&quot;
+## 
+## [[6]]
+## [1] &quot;CO : NORTH SUBURBAN MEDICAL CENTER&quot;
+## 
+## [[7]]
+## [1] &quot;CT : JOHNSON MEMORIAL HOSPITAL&quot;
+## 
+## [[8]]
+## [1] &quot;DE : ST FRANCIS HEALTHCARE&quot;
+## 
+## [[9]]
+## [1] &quot;DC : HOWARD UNIVERSITY HOSPITAL&quot;
+## 
+## [[10]]
+## [1] &quot;FL : PALMETTO GENERAL HOSPITAL&quot;
+## 
+## [[11]]
+## [1] &quot;GA : WEST GEORGIA MEDICAL CENTER&quot;
+## 
+## [[12]]
+## [1] &quot;HI : PALI MOMI MEDICAL CENTER&quot;
+## 
+## [[13]]
+## [1] &quot;ID : EASTERN IDAHO REGIONAL MEDICAL CENTER&quot;
+## 
+## [[14]]
+## [1] &quot;IL : SAINT ANTHONY MEDICAL CENTER&quot;
+## 
+## [[15]]
+## [1] &quot;IN : MARION GENERAL HOSPITAL&quot;
+## 
+## [[16]]
+## [1] &quot;IA : BOONE COUNTY HOSPITAL&quot;
+## 
+## [[17]]
+## [1] &quot;KS : OLATHE MEDICAL CENTER&quot;
+## 
+## [[18]]
+## [1] &quot;KY : MURRAY-CALLOWAY COUNTY HOSPITAL&quot;
+## 
+## [[19]]
+## [1] &quot;LA : RIVER PARISHES HOSPITAL&quot;
+## 
+## [[20]]
+## [1] &quot;ME : PENOBSCOT VALLEY HOSPITAL&quot;
+## 
+## [[21]]
+## [1] &quot;MD : HARFORD MEMORIAL HOSPITAL&quot;
+## 
+## [[22]]
+## [1] &quot;MA : NOBLE HOSPITAL&quot;
+## 
+## [[23]]
+## [1] &quot;MI : HURLEY MEDICAL CENTER&quot;
+## 
+## [[24]]
+## [1] &quot;MN : HEALTHEAST ST JOHN'S HOSPITAL&quot;
+## 
+## [[25]]
+## [1] &quot;MS : SOUTHWEST MS REGIONAL MEDICAL CENTER&quot;
+## 
+## [[26]]
+## [1] &quot;MO : POPLAR BLUFF REGIONAL MEDICAL CENTER&quot;
+## 
+## [[27]]
+## [1] &quot;MT : BOZEMAN DEACONESS HOSPITAL&quot;
+## 
+## [[28]]
+## [1] &quot;NE : OMAHA VA MEDICAL CENTER (VA NEBRASKA WESTERN IOWA HEALTHCARE SYSTEM)&quot;
+## 
+## [[29]]
+## [1] &quot;NV : DESERT SPRINGS HOSPITAL&quot;
+## 
+## [[30]]
+## [1] &quot;NH : FRANKLIN REGIONAL HOSPITAL&quot;
+## 
+## [[31]]
+## [1] &quot;NJ : ROBERT WOOD JOHNSON UNIVERSITY HOSPITAL AT RAHWAY&quot;
+## 
+## [[32]]
+## [1] &quot;NM : MOUNTAIN VIEW REGIONAL MEDICAL CENTER&quot;
+## 
+## [[33]]
+## [1] &quot;NY : F F THOMPSON HOSPITAL&quot;
+## 
+## [[34]]
+## [1] &quot;NC : WAYNE MEMORIAL HOSPITAL&quot;
+## 
+## [[35]]
+## [1] &quot;ND : ALTRU HOSPITAL&quot;
+## 
+## [[36]]
+## [1] &quot;OH : MERCY FRANCISCAN HOSPITAL WESTERN HILLS&quot;
+## 
+## [[37]]
+## [1] &quot;OK : MERCY MEMORIAL HEALTH CENTER&quot;
+## 
+## [[38]]
+## [1] &quot;OR : THREE RIVERS COMMUNITY HOSPITAL&quot;
+## 
+## [[39]]
+## [1] &quot;PA : EPHRATA COMMUNITY HOSPITAL&quot;
+## 
+## [[40]]
+## [1] &quot;PR : DOCTORS' CENTER HOSPITAL, INC&quot;
+## 
+## [[41]]
+## [1] &quot;RI : WESTERLY HOSPITAL&quot;
+## 
+## [[42]]
+## [1] &quot;SC : WACCAMAW COMMUNITY HOSPITAL&quot;
+## 
+## [[43]]
+## [1] &quot;SD : PRAIRIE LAKES HOSPITAL&quot;
+## 
+## [[44]]
+## [1] &quot;TN : DYERSBURG REGIONAL MEDICAL CENTER&quot;
+## 
+## [[45]]
+## [1] &quot;TX : LAREDO MEDICAL CENTER&quot;
+## 
+## [[46]]
+## [1] &quot;UT : ST MARKS HOSPITAL&quot;
+## 
+## [[47]]
+## [1] &quot;VT : NORTHEASTERN VERMONT REGIONAL HOSPITAL&quot;
+## 
+## [[48]]
+## [1] &quot;VI : GOV JUAN F LUIS HOSPITAL &amp; MEDICAL CTR&quot;
+## 
+## [[49]]
+## [1] &quot;VA : RIVERSIDE TAPPAHANNOCK HOSPITAL&quot;
+## 
+## [[50]]
+## [1] &quot;WA : KADLEC REGIONAL MEDICAL CENTER&quot;
+## 
+## [[51]]
+## [1] &quot;WV : THOMAS MEMORIAL HOSPITAL&quot;
+## 
+## [[52]]
+## [1] &quot;WI : HOLY FAMILY MEMORIAL INC&quot;
+## 
+## [[53]]
+## [1] &quot;WY : SHERIDAN MEMORIAL HOSPITAL&quot;
+## 
+## [[54]]
+## [1] &quot;GU : GUAM MEMORIAL HOSPITAL AUTHORITY&quot;</code></pre>
 </div>
 
 

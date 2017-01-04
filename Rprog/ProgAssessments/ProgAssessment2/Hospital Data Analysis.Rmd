@@ -82,27 +82,24 @@ ranking <- function(state, condition, rank = 'best') {
   }
   
 }
-ranking("TX", "Heart Attack", "1")
-# best("TX", "Heart Failuare")
-# best("MD", "Heart Attack")
-# best("MD", "Pneumonia")
+ranking("TX", "Heart Attack", rank = "worst")
+```
+
+```{r}
+best <- function(state, condition){
+  ranking(state, condition, rank = 1)
+}
+best("MD", "Pneumonia")
 ```
 
 ```{r}
 rankall <- function(condition, rank = "best"){
-  switch(condition,
-         'Heart Attack'={
-           col = 11
-         },
-         'Heart Failure'={
-           col = 17
-         },
-         'Pneumonia'={
-           col = 23
-         },
-         return("Error in best(" + state + ", " + condition + ") : invalid condition")
-         )
   top_rankings = data.frame()
-  lapply(outcome, function(col, ))
+  states = unique(outcome[, 7])
+  lapply(states, function(f){
+    paste(f, ":", ranking(f, condition, 1))
+    })
 }
+
+rankall("Heart Attack")
 ```
