@@ -1,0 +1,40 @@
+---
+title: "Do Bigger Hospitals provide better or worse care?"
+author: "Jonathan Katz"
+date: "January 9, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/IntroDS/IntroDS_Pierrepont/Rprog/hospital readmit outcome/")
+outcome <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
+readmit <- read.csv("Hospital_Readmissions_Reduction_Program.csv", colClasses = "character")
+```
+
+## R Markdown
+
+Hypothethis:
+
+Larger hospitals give overall better care.
+
+(as.double(f[, 11])/(0.01*f[, 15]))
+
+Analysis:
+
+To analyze the data, I will first finding the total number of patients who are hospitalized for a certain condition per 30 days, which I will find by dividing the Hospital 30 day death rate by the Hospital's mortality rate x 0.01.
+
+Then I will graph a scatterplot of the total number of patients hospitalized for a condition vs. the mortality rate.
+
+```{r warning=FALSE}
+cleaned_data = sapply(outcome, as.numeric)
+
+condition_rate_i = 11
+
+num_of_patients_i = 15
+
+condition_rate = cleaned_data[, condition_rate_i]
+total = (cleaned_data[, num_of_patients_i]/(cleaned_data[, condition_rate_i]*0.01))
+plot(total, condition_rate, xlab = "Patients admitted for condition", ylab = "Mortality rate for condition", type = "p")
+hist(condition_rate, breaks=40, col="red")
+```
